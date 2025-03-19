@@ -16,7 +16,7 @@ console.log(posts.value);
   <div>
     <h1>Post`s list</h1>
     <div class="post">
-      <div v-for="(post, index) in posts" :key="index">
+      <div v-for="post in posts" :key="post.id">
         <post-item v-bind="post" />
       </div>
     </div>

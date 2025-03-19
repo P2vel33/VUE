@@ -1,14 +1,6 @@
 <script setup>
-import {
-  onMounted,
-  reactive,
-  ref,
-  watch,
-  watchEffect,
-  watchPostEffect,
-} from "vue";
+import { ref } from "vue";
 import MyButton from "./components/UI/MyButton.vue";
-import PostItem from "./components/PostItem.vue";
 import PostsList from "./components/PostsList.vue";
 import PostForm from "./components/PostForm.vue";
 
@@ -57,10 +49,23 @@ const fetchPosts = async () => {
       throw new Error("Сеть не отвечает");
     }
     const data = await response.json();
+    console.log(data.slice(0, 10));
     posts.value = data.slice(0, 10); // Получаем первые 10 постов
   } catch (error) {
     console.error("Ошибка при загрузке постов:", error);
   }
+};
+
+const getPosts = () => {
+  const arr = [
+    { id: 5, title: "JavaScript 5", body: "Learn JS 5" },
+    { id: 6, title: "JavaScript 5", body: "Learn JS 5" },
+    { id: 7, title: "JavaScript 5", body: "Learn JS 5" },
+    { id: 8, title: "JavaScript 5", body: "Learn JS 5" },
+    { id: 9, title: "JavaScript 5", body: "Learn JS 5" },
+  ];
+  posts.value = [...arr];
+  console.log(posts.value);
 };
 
 // watch(posts.value, (newPosts) => {
@@ -77,9 +82,7 @@ const fetchPosts = async () => {
 <template>
   <div class="app">
     <post-form @create="createPost" />
-    <my-button @click="fetchPosts" style="margin-left: auto"
-      >Get posts</my-button
-    >
+    <my-button @click="getPosts" style="margin-left: auto">Get posts</my-button>
     <!-- <component :is="PostsList" :posts="posts"></component> -->
     <posts-list :posts="posts" />
   </div>
