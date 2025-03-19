@@ -50,11 +50,11 @@ async function getPosts() {
 //   // console.log(newPosts);
 //   // console.log(posts.value);
 // });
-onMounted(() => {
-  setTimeout(() => {
-    getPosts();
-  }, 1000);
-});
+// onMounted(() => {
+//   setTimeout(() => {
+//     getPosts();
+//   }, 1000);
+// });
 </script>
 
 <template>
