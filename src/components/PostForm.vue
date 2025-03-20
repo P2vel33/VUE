@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from "vue";
-import MyButton from "./UI/MyButton.vue";
+// import MyButton from "./UI/MyButton.vue";
+// import MyInput from "./UI/MyInput.vue";
 
 const props = defineProps({
   show: Boolean,
@@ -17,8 +18,9 @@ function createPost(post) {
 
 <template>
   <div class="new_post">
-    <input v-model="post.title" type="text" placeholder="Name" />
-    <input v-model="post.body" type="text" placeholder="Description" />
+    <my-input v-model="post.title" placeholder="Name" />
+    <!-- <input v-model="post.title" type="text" placeholder="Name" /> -->
+    <my-input v-model="post.body" placeholder="Description" />
     <my-button @click="createPost(post)" style="margin-left: auto"
       >Create post
     </my-button>

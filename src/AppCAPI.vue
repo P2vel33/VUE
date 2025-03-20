@@ -4,6 +4,7 @@ import MyButton from "./components/UI/MyButton.vue";
 import PostsList from "./components/PostsList.vue";
 import PostForm from "./components/PostForm.vue";
 import MyModal from "./components/UI/MyModal.vue";
+import usePosts from "./hooks/usePosts";
 
 const posts = ref([]);
 const isVisiable = ref(false);

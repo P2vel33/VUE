@@ -1,9 +1,6 @@
 <script setup>
-import PostForm from "../PostForm.vue";
-
 const props = defineProps({
   isVisiable: Boolean,
-  //   createPost: function
 });
 
 const emit = defineEmits(["update:isVisiable"]);
