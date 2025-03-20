@@ -2,9 +2,13 @@
 import { ref } from "vue";
 import MyButton from "./UI/MyButton.vue";
 
+const props = defineProps({
+  show: Boolean,
+});
 const post = ref({ title: "", body: "" });
-const emit = defineEmits(["create"]);
+const emit = defineEmits(["create", "update:show"]);
 function createPost(post) {
+  emit("update:show", false);
   emit("create", post);
   post.title = "";
   post.body = "";

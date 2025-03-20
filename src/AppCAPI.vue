@@ -3,8 +3,10 @@ import { onMounted, ref } from "vue";
 import MyButton from "./components/UI/MyButton.vue";
 import PostsList from "./components/PostsList.vue";
 import PostForm from "./components/PostForm.vue";
+import MyModal from "./components/UI/MyModal.vue";
 
 const posts = ref([]);
+const isVisiable = ref(false);
 
 function createPost(post) {
   posts.value.push({ ...post, id: Date.now() });
@@ -43,7 +45,18 @@ onMounted(() => {
 
 <template>
   <div class="app">
-    <post-form @create="createPost" />
+    <my-button @click="() => (isVisiable = true)">Create</my-button>
+    <my-modal
+      :isVisiable="isVisiable"
+      @update:isVisiable="(newVisiable) => (isVisiable = newVisiable)"
+    >
+      <post-form
+        @create="createPost"
+        :isVisiable="isVisiable"
+        @update:show="(newVisiable) => (isVisiable = newVisiable)"
+      />
+    </my-modal>
+    <!-- <post-form @create="createPost" /> -->
     <!-- <my-button @click="fetchPosts" style="margin-left: auto"
       >Get posts</my-button
     > -->

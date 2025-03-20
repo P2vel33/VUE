@@ -1,7 +1,7 @@
 <script setup>
 import PostItem from "./PostItem.vue";
 
-const props = defineProps({
+const { posts } = defineProps({
   posts: Array,
 });
 </script>
@@ -10,7 +10,7 @@ const props = defineProps({
   <div>
     <h1>Post`s list</h1>
     <div class="post">
-      <div v-for="post in props.posts" :key="post.id">
+      <div v-for="post in posts" :key="post.id">
         <post-item :="post" />
       </div>
     </div>
