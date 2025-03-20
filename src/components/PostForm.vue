@@ -6,6 +6,8 @@ const post = ref({ title: "", body: "" });
 const emit = defineEmits(["create"]);
 function createPost(post) {
   emit("create", post);
+  post.title = "";
+  post.body = "";
 }
 </script>
 

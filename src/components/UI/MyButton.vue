@@ -13,5 +13,6 @@
   border: 3px solid teal;
   color: teal;
   padding: 10px;
+  margin-left: auto;
 }
 </style>

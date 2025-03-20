@@ -1,14 +1,11 @@
 <script setup>
-import { ref } from "vue";
 import MyButton from "./UI/MyButton.vue";
 
-// MyButton;
 const props = defineProps({
   id: Number || Date,
   title: String,
   body: String,
 });
-const post = ref(props);
 </script>
 
 <template>
@@ -16,11 +13,14 @@ const post = ref(props);
     <div>
       <div>
         <strong>Id:</strong> {{ props.id }} <strong>Title:</strong>
-        {{ post.title }}
+        {{ props.title }}
       </div>
-      <div><strong>Body:</strong> {{ post.body }}</div>
+      <div><strong>Body:</strong> {{ props.body }}</div>
     </div>
-    <my-button style="margin-left: auto">Delete</my-button>
+    <div style="margin-left: auto">
+      <my-button>Open</my-button>
+      <my-button style="margin-left: 10px">Delete</my-button>
+    </div>
   </div>
 </template>
 
@@ -36,7 +36,5 @@ const post = ref(props);
   display: flex;
   flex-direction: row;
   margin: 0 5px;
-  /* justify-content: flex-end; */
-  /* width: 100%; */
 }
 </style>
