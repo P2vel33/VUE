@@ -77,18 +77,21 @@ onMounted(() => {
     </my-modal>
 
     <my-loading v-if="isLoading" />
-    <posts-list v-else v-bind:posts="posts" />
-    <div class="pages">
-      <div
-        class="page"
-        v-for="pageNumber in totalPages"
-        :key="pageNumber"
-        :class="{ page__content: page === pageNumber }"
-        @click="changePage(pageNumber)"
-      >
-        {{ pageNumber }}
+    <div v-else>
+      <posts-list v-bind:posts="posts" />
+      <div class="pages">
+        <div
+          class="page"
+          v-for="pageNumber in totalPages"
+          :key="pageNumber"
+          :class="{ page__content: page === pageNumber }"
+          @click="changePage(pageNumber)"
+        >
+          {{ pageNumber }}
+        </div>
       </div>
     </div>
+
     <!-- @update:posts="deletePost" -->
     <!-- <div class="page__wrapper">
       <div
@@ -113,6 +116,7 @@ onMounted(() => {
 .pages {
   display: flex;
   cursor: pointer;
+  /* position: absolute; */
   margin-top: 15px;
   justify-content: center;
 
