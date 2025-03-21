@@ -1,16 +1,15 @@
 <script setup>
+import { inject } from "vue";
 import MyButton from "./UI/MyButton.vue";
+
+// const getPostId = inject("getPostId");
+const deletedPost = inject("deletedPost");
 
 const props = defineProps({
   id: Number || Date,
   title: String,
   body: String,
 });
-
-const emit = defineEmits(["update:post"]);
-const deletePost = () => {
-  emit("update:post", props);
-};
 </script>
 
 <template>
@@ -24,7 +23,7 @@ const deletePost = () => {
     </div>
     <div style="margin-left: auto">
       <my-button>Open</my-button>
-      <my-button style="margin-left: 10px" @click="deletePost"
+      <my-button style="margin-left: 10px" @click="deletedPost(props)"
         >Delete</my-button
       >
     </div>

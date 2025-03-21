@@ -4,11 +4,6 @@ import PostItem from "./PostItem.vue";
 const { posts } = defineProps({
   posts: Array,
 });
-
-const emit = defineEmits(["update:posts"]);
-const deletePost = (post) => {
-  emit("update:posts", post);
-};
 </script>
 
 <template>
@@ -19,7 +14,7 @@ const deletePost = (post) => {
     <h1 v-else>Post`s list</h1>
     <div class="post">
       <div v-for="post in posts" :key="post.id">
-        <post-item :="post" @update:post="(post) => deletePost(post)" />
+        <post-item :="post" />
       </div>
     </div>
   </div>

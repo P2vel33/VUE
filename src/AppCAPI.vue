@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, provide, ref } from "vue";
 import MyButton from "./components/UI/MyButton.vue";
 import PostsList from "./components/PostsList.vue";
 import PostForm from "./components/PostForm.vue";
@@ -33,10 +33,11 @@ const fetchPosts = async () => {
   }
 };
 
-const deletePost = (post) => {
+const deletedPost = (post) => {
   posts.value = [...posts.value].filter((elem) => elem.id !== post.id);
 };
 
+provide("deletedPost", deletedPost);
 onMounted(() => {
   fetchPosts();
 });
@@ -55,16 +56,10 @@ onMounted(() => {
         @update:show="(newVisiable) => (isVisiable = newVisiable)"
       />
     </my-modal>
-    <!-- <post-form @create="createPost" /> -->
-    <!-- <my-button @click="fetchPosts" style="margin-left: auto"
-      >Get posts</my-button
-    > -->
+
     <my-loading v-if="isLoading" />
-    <posts-list
-      v-else
-      v-bind:posts="posts"
-      @update:posts="(post) => deletePost(post)"
-    />
+    <posts-list v-else v-bind:posts="posts" />
+    <!-- @update:posts="deletePost" -->
   </div>
 </template>
 
