@@ -1,4 +1,8 @@
-<script setup></script>
+<script setup>
+// export default {
+//   name: "my-loading",
+// };
+</script>
 <template>
   <div class="loading">
     <div class="loading__content">posts</div>

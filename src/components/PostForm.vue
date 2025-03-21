@@ -18,7 +18,7 @@ function createPost(post) {
 
 <template>
   <div class="new_post">
-    <my-input v-model="post.title" placeholder="Name" />
+    <my-input v-focus v-model="post.title" placeholder="Name" />
     <!-- <input v-model="post.title" type="text" placeholder="Name" /> -->
     <my-input v-model="post.body" placeholder="Description" />
     <my-button @click="createPost(post)" style="margin-left: auto"

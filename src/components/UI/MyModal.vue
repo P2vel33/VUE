@@ -1,4 +1,8 @@
 <script setup>
+// export default {
+//   name: "my-modal",
+// };
+
 const props = defineProps({
   isVisiable: Boolean,
 });

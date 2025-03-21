@@ -1,4 +1,8 @@
-<script setup></script>
+<script setup>
+// export default {
+//   name: "my-button",
+// };
+</script>
 
 <template>
   <button class="btn">

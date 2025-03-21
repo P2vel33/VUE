@@ -1,4 +1,8 @@
 <script setup>
+// export default {
+//   name: "my-input",
+// };
+
 const props = defineProps({
   modelValue: String || Number,
 });
