@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
-// import MyButton from "./UI/MyButton.vue";
-// import MyInput from "./UI/MyInput.vue";
+import MyButton from "./UI/MyButton.vue";
+import MyInput from "./UI/MyInput.vue";
 
 const props = defineProps({
   show: Boolean,

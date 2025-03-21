@@ -4,10 +4,12 @@ import MyButton from "./components/UI/MyButton.vue";
 import PostsList from "./components/PostsList.vue";
 import PostForm from "./components/PostForm.vue";
 import MyModal from "./components/UI/MyModal.vue";
-import usePosts from "./hooks/usePosts";
+import MyLoading from "./components/UI/MyLoading.vue";
+// import usePosts from "./hooks/usePosts";
 
 const posts = ref([]);
 const isVisiable = ref(false);
+const isLoading = ref(false);
 
 function createPost(post) {
   posts.value.push({ ...post, id: Date.now() });
@@ -15,6 +17,7 @@ function createPost(post) {
 
 const fetchPosts = async () => {
   try {
+    isLoading.value = true;
     const response = await fetch(
       "https://jsonplaceholder.typicode.com/posts?_limit=10"
     );
@@ -22,21 +25,16 @@ const fetchPosts = async () => {
       throw new Error("Сеть не отвечает");
     }
     const data = await response.json();
-    posts.value = data; // Получаем первые 10 постов
+    posts.value = data;
   } catch (error) {
     console.error("Ошибка при загрузке постов:", error);
+  } finally {
+    isLoading.value = false;
   }
 };
 
-const getPosts = () => {
-  const arr = [
-    { id: 5, title: "JavaScript 5", body: "Learn JS 5" },
-    { id: 6, title: "JavaScript 5", body: "Learn JS 5" },
-    { id: 7, title: "JavaScript 5", body: "Learn JS 5" },
-    { id: 8, title: "JavaScript 5", body: "Learn JS 5" },
-    { id: 9, title: "JavaScript 5", body: "Learn JS 5" },
-  ];
-  posts.value = [...arr];
+const deletePost = (post) => {
+  posts.value = [...posts.value].filter((elem) => elem.id !== post.id);
 };
 
 onMounted(() => {
@@ -61,7 +59,12 @@ onMounted(() => {
     <!-- <my-button @click="fetchPosts" style="margin-left: auto"
       >Get posts</my-button
     > -->
-    <posts-list v-bind:posts="posts" />
+    <my-loading v-if="isLoading" />
+    <posts-list
+      v-else
+      v-bind:posts="posts"
+      @update:posts="(post) => deletePost(post)"
+    />
   </div>
 </template>
 

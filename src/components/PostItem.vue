@@ -6,6 +6,11 @@ const props = defineProps({
   title: String,
   body: String,
 });
+
+const emit = defineEmits(["update:post"]);
+const deletePost = () => {
+  emit("update:post", props);
+};
 </script>
 
 <template>
@@ -19,7 +24,9 @@ const props = defineProps({
     </div>
     <div style="margin-left: auto">
       <my-button>Open</my-button>
-      <my-button style="margin-left: 10px">Delete</my-button>
+      <my-button style="margin-left: 10px" @click="deletePost"
+        >Delete</my-button
+      >
     </div>
   </div>
 </template>
