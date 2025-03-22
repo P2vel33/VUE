@@ -8,7 +8,7 @@ const app = createApp(App);
 
 directives.forEach((directive) => app.directive(directive.name, directive));
 components.forEach((component) => {
-  console.log(component.__name);
+  //   console.log(component.__name);
   return app.component(component.__name, component);
 });
 

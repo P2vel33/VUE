@@ -6,7 +6,7 @@ const props = defineProps({
 const emit = defineEmits(["update:isVisiable"]);
 function hideModal() {
   emit("update:isVisiable", false);
-  console.log("WORK");
+  // console.log("WORK");
 }
 </script>
 
