@@ -1,14 +1,17 @@
-<!-- <script setup>
+<script setup>
 const props = defineProps({
-  sortOptions: Array,
-  default: () => [],
+  sortOptions: { type: Array, default: () => [] },
+  selectedSort: String,
 });
-
-
+console.log(props);
+const emit = defineEmits(["update:selectedSort"]);
+const selectSort = (event) => {
+  emit("update:selectedSort", event.target.value);
+};
 </script>
 
 <template>
-  <select @change="(e) => checkSort(e.target.value)">
+  <select @change="(e) => selectSort(e)">
     <option disabled value="Change">Change meaning of sort</option>
     <option
       v-for="option in sortOptions"
@@ -20,4 +23,4 @@ const props = defineProps({
   </select>
 </template>
 
-<style scoped></style> -->
+<style scoped></style>

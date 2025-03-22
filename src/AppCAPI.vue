@@ -42,6 +42,9 @@ const checkSort = (value) => {
 watch(page, () => {
   fetchPosts();
 });
+watch(selectedSort, () => {
+  checkSort(selectedSort.value);
+});
 
 provide("deletedPost", deletedPost);
 </script>
@@ -50,16 +53,11 @@ provide("deletedPost", deletedPost);
   <div class="app">
     <div class="head">
       <my-button @click="() => (isVisiable = true)">Create</my-button>
-      <select @change="(e) => checkSort(e.target.value)">
-        <option disabled value="Change">Change meaning of sort</option>
-        <option
-          v-for="option in sortOptions"
-          :key="option.value"
-          :value="option.value"
-        >
-          {{ option.name }}
-        </option>
-      </select>
+      <my-select
+        :sortOptions="sortOptions"
+        :selectedSort="selectedSort"
+        @update:selectedSort="(value) => (selectedSort = value)"
+      />
     </div>
 
     <my-modal
