@@ -1,17 +1,18 @@
 <script setup>
 import { onMounted, provide, ref, watch } from "vue";
-import MyButton from "./components/UI/MyButton.vue";
+// import MyButton from "./components/UI/MyButton.vue";
 import PostsList from "./components/PostsList.vue";
 import PostForm from "./components/PostForm.vue";
-import MyModal from "./components/UI/MyModal.vue";
-import MyLoading from "./components/UI/MyLoading.vue";
+// import MyModal from "./components/UI/MyModal.vue";
+// import MyLoading from "./components/UI/MyLoading.vue";
+
 // import usePosts from "./hooks/usePosts";
 
 const posts = ref([]);
 const isVisiable = ref(false);
 const isLoading = ref(false);
 const limit = ref(10);
-const page = ref(2);
+const page = ref(1);
 const totalPages = ref(0);
 
 function createPost(post) {
@@ -25,7 +26,6 @@ const fetchPosts = async () => {
       _limit: limit.value,
       _page: page.value,
     }).toString();
-    console.log(params);
     const response = await fetch(
       `https://jsonplaceholder.typicode.com/posts?${params}`
     );

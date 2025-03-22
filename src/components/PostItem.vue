@@ -1,6 +1,6 @@
 <script setup>
 import { inject } from "vue";
-import MyButton from "./UI/MyButton.vue";
+// import MyButton from "./UI/MyButton.vue";
 
 // const getPostId = inject("getPostId");
 const deletedPost = inject("deletedPost");

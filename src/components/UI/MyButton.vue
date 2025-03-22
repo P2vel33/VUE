@@ -1,7 +1,5 @@
 <script setup>
-// export default {
-//   name: "my-button",
-// };
+// name: asd;
 </script>
 
 <template>
