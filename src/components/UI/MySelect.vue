@@ -22,4 +22,8 @@ const selectSort = (event) => {
   </select>
 </template>
 
-<style scoped></style>
+<style scoped>
+select {
+  border-radius: 5px;
+}
+</style>

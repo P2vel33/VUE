@@ -16,5 +16,6 @@
   color: teal;
   padding: 10px;
   margin-left: auto;
+  border-radius: 5px;
 }
 </style>

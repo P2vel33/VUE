@@ -1,5 +1,5 @@
 <script setup>
-import { computed, provide, ref, watch } from "vue";
+import { computed, onMounted, provide, ref, watch } from "vue";
 import PostsList from "./components/PostsList.vue";
 import PostForm from "./components/PostForm.vue";
 import usePosts from "./hooks/usePosts";
@@ -8,6 +8,7 @@ import usePosts from "./hooks/usePosts";
 const isVisiable = ref(false);
 const selectedSort = ref("");
 const search = ref("");
+const observer = ref(null);
 const sortOptions = [
   { value: "title", name: "Sort of title" },
   { value: "body", name: "Sort of body" },
@@ -16,6 +17,7 @@ const sortOptions = [
 const limit = ref(10);
 const page = ref(1);
 const { posts, isLoading, totalPages, fetchPosts } = usePosts(limit, page);
+
 // const { selectedSort, sortedPosts } = useSortedPosts(posts);
 const sortedPosts = computed(() => {
   if (selectedSort.value !== "id") {
@@ -40,9 +42,9 @@ const deletedPost = (post) => {
   posts.value = [...posts.value].filter((elem) => elem.id !== post.id);
 };
 
-const changePage = (pageNumber) => {
-  page.value = pageNumber;
-};
+// const changePage = (pageNumber) => {
+//   page.value = pageNumber;
+// };
 
 const checkSort = (value) => {
   if (value !== "id") {
@@ -56,9 +58,51 @@ const checkSort = (value) => {
   }
 };
 
-watch(page, () => {
-  fetchPosts();
+const loadMorePosts = async () => {
+  try {
+    page.value += 1;
+    // isLoading.value = true;
+    const params = new URLSearchParams({
+      _limit: limit.value,
+      _page: page.value,
+    }).toString();
+    const response = await fetch(
+      `https://jsonplaceholder.typicode.com/posts?${params}`
+    );
+    if (!response.ok) {
+      throw new Error("Сеть не отвечает");
+    }
+    const data = await response.json();
+    // totalPages.value = Math.ceil(
+    //   response.headers.get("x-total-count") / limit.value
+    // );
+    posts.value = [...posts.value, ...data];
+  } catch (error) {
+    console.error("Ошибка при загрузке постов:", error);
+  } finally {
+    // isLoading.value = false;
+  }
+};
+
+onMounted(() => {
+  // console.log(totalPages.value);
+  const options = {
+    rootMargin: "0px",
+    threshold: 1.0,
+  };
+  const callback = (entries, observer) => {
+    if (entries[0].isIntersecting) {
+      // console.log(totalPages.value);
+      loadMorePosts();
+    }
+  };
+  const run = new IntersectionObserver(callback, options);
+  run.observe(observer.value);
 });
+// watch(page, () => {
+//   fetchPosts();
+// });
+
 // watch(selectedSort, () => {
 //   checkSort(selectedSort.value);
 // });
@@ -92,7 +136,7 @@ provide("deletedPost", deletedPost);
     <my-loading v-if="isLoading" />
     <div v-else>
       <posts-list v-bind:posts="searchAndSortedPosts" />
-      <div class="pages">
+      <!-- <div class="pages">
         <div
           class="page"
           v-for="pageNumber in totalPages"
@@ -102,8 +146,9 @@ provide("deletedPost", deletedPost);
         >
           {{ pageNumber }}
         </div>
-      </div>
+      </div> -->
     </div>
+    <div ref="observer" class="observer"></div>
   </div>
 </template>
 
@@ -135,5 +180,10 @@ select {
 .head {
   display: flex;
   gap: 10px;
+}
+
+.observer {
+  height: 30px;
+  background-color: green;
 }
 </style>

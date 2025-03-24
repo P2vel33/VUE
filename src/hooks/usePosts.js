@@ -29,6 +29,7 @@ export default function usePosts(limit, page) {
       console.error("Ошибка при загрузке постов:", error);
     } finally {
       isLoading.value = false;
+      // console.log(totalPages.value);
     }
   };
   onMounted(fetchPosts);

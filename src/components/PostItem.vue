@@ -38,6 +38,10 @@ const props = defineProps({
 
 .post__content {
   padding: 10px;
+  /* border-radius: 5%; */
+  border-radius: 15px;
+  /* border-top-left-radius: 15%; */
+  /* border-bottom-right-radius: 15%; */
   border: 3px solid teal;
   display: flex;
   flex-direction: row;
