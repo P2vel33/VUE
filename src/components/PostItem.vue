@@ -22,7 +22,7 @@ const props = defineProps({
       <div><strong>Body:</strong> {{ props.body }}</div>
     </div>
     <div style="margin-left: auto">
-      <my-button>Open</my-button>
+      <my-button @click="$router.push(`/posts/${props.id}`)">Open</my-button>
       <my-button style="margin-left: 10px" @click="deletedPost(props)"
         >Delete</my-button
       >

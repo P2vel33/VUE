@@ -152,11 +152,7 @@ provide("deletedPost", deletedPost);
   </div>
 </template>
 
-<style>
-* {
-  margin: 0;
-  padding: 0;
-}
+<style scoped>
 .pages {
   display: flex;
   cursor: pointer;

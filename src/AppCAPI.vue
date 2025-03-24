@@ -1,9 +1,17 @@
 <template>
+  <navbar></navbar>
   <div class="app">
     <router-view></router-view>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import Navbar from "./components/Navbar.vue";
+</script>
 
-<style scoped></style>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+}
+</style>
