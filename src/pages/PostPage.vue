@@ -3,6 +3,7 @@ import { computed, onMounted, provide, ref, watch } from "vue";
 import PostsList from "../components/PostsList.vue";
 import PostForm from "../components/PostForm.vue";
 import usePosts from "../hooks/usePosts";
+
 // import useSortedPosts from "./hooks/useSortedPosts";
 
 const isVisiable = ref(false);
@@ -86,18 +87,18 @@ const loadMorePosts = async () => {
 
 onMounted(() => {
   // console.log(totalPages.value);
-  const options = {
-    rootMargin: "0px",
-    threshold: 1.0,
-  };
-  const callback = (entries, observer) => {
-    if (entries[0].isIntersecting) {
-      // console.log(totalPages.value);
-      loadMorePosts();
-    }
-  };
-  const run = new IntersectionObserver(callback, options);
-  run.observe(observer.value);
+  //   const options = {
+  //     rootMargin: "0px",
+  //     threshold: 1.0,
+  //   };
+  //   const callback = (entries, observer) => {
+  //     if (entries[0].isIntersecting) {
+  //       // console.log(totalPages.value);
+  //       loadMorePosts();
+  //     }
+  //   };
+  //   const run = new IntersectionObserver(callback, options);
+  //   run.observe(observer.value);
 });
 // watch(page, () => {
 //   fetchPosts();
@@ -148,7 +149,7 @@ provide("deletedPost", deletedPost);
         </div>
       </div> -->
     </div>
-    <div ref="observer" class="observer"></div>
+    <div v-intersection="loadMorePosts" class="observer"></div>
   </div>
 </template>
 

@@ -13,5 +13,9 @@
 .navbar {
   background-color: chocolate;
   display: flex;
+  justify-content: end;
+  margin-bottom: 10px;
+
+  /* position: sticky; */
 }
 </style>

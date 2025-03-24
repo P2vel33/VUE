@@ -7,7 +7,10 @@ import directives from "./directives/index";
 import router from "./router/router";
 const app = createApp(App);
 
-directives.forEach((directive) => app.directive(directive.name, directive));
+directives.forEach((directive) => {
+  // console.log(directive.name);
+  app.directive(directive.name, directive);
+});
 components.forEach((component) => {
   //   console.log(component.__name);
   return app.component(component.__name, component);
