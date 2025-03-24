@@ -4,6 +4,7 @@ import { createApp } from "vue";
 import App from "./AppCAPI.vue";
 import components from "./components/UI/index";
 import directives from "./directives/index";
+import router from "./router/router";
 const app = createApp(App);
 
 directives.forEach((directive) => app.directive(directive.name, directive));
@@ -12,6 +13,6 @@ components.forEach((component) => {
   return app.component(component.__name, component);
 });
 
-app.mount("#app");
+app.use(router).mount("#app");
 
 // createApp(App).mount("#app");
