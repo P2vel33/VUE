@@ -3,7 +3,6 @@ const props = defineProps({
   sortOptions: { type: Array, default: () => [] },
   selectedSort: String,
 });
-console.log(props);
 const emit = defineEmits(["update:selectedSort"]);
 const selectSort = (event) => {
   emit("update:selectedSort", event.target.value);

@@ -1,8 +1,9 @@
 <script setup>
-import { provide, ref, watch } from "vue";
+import { computed, provide, ref, watch } from "vue";
 import PostsList from "./components/PostsList.vue";
 import PostForm from "./components/PostForm.vue";
 import usePosts from "./hooks/usePosts";
+// import useSortedPosts from "./hooks/useSortedPosts";
 
 const isVisiable = ref(false);
 const selectedSort = ref("");
@@ -14,6 +15,18 @@ const sortOptions = [
 const limit = ref(10);
 const page = ref(1);
 const { posts, isLoading, totalPages, fetchPosts } = usePosts(limit, page);
+// const { selectedSort, sortedPosts } = useSortedPosts(posts);
+const sortedPosts = computed(() => {
+  if (selectedSort.value !== "id") {
+    return [...posts.value].sort((post1, post2) =>
+      post1[selectedSort.value]?.localeCompare(post2[selectedSort.value])
+    );
+  } else {
+    return [...posts.value].sort(
+      (post1, post2) => post1[selectedSort.value] - post2[selectedSort.value]
+    );
+  }
+});
 
 const createPost = (post) => {
   posts.value.push({ ...post, id: Date.now() });
@@ -42,9 +55,9 @@ const checkSort = (value) => {
 watch(page, () => {
   fetchPosts();
 });
-watch(selectedSort, () => {
-  checkSort(selectedSort.value);
-});
+// watch(selectedSort, () => {
+//   checkSort(selectedSort.value);
+// });
 
 provide("deletedPost", deletedPost);
 </script>
@@ -73,7 +86,7 @@ provide("deletedPost", deletedPost);
 
     <my-loading v-if="isLoading" />
     <div v-else>
-      <posts-list v-bind:posts="posts" />
+      <posts-list v-bind:posts="sortedPosts" />
       <div class="pages">
         <div
           class="page"

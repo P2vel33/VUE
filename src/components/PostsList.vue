@@ -1,4 +1,5 @@
 <script setup>
+import { TransitionGroup } from "vue";
 import PostItem from "./PostItem.vue";
 
 const { posts } = defineProps({
@@ -13,9 +14,11 @@ const { posts } = defineProps({
     </h1>
     <h1 v-else>Post`s list</h1>
     <div class="post">
-      <div v-for="post in posts" :key="post.id">
-        <post-item :="post" />
-      </div>
+      <TransitionGroup name="post-list">
+        <div v-for="post in posts" :key="post.id">
+          <post-item :="post" />
+        </div>
+      </TransitionGroup>
     </div>
   </div>
 </template>
@@ -29,5 +32,15 @@ h1 {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.post-list-enter-active,
+.post-list-leave-active {
+  transition: all 0.5s ease;
+}
+.post-list-enter-from,
+.post-list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
 }
 </style>
