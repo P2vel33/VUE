@@ -7,6 +7,7 @@ import usePosts from "./hooks/usePosts";
 
 const isVisiable = ref(false);
 const selectedSort = ref("");
+const search = ref("");
 const sortOptions = [
   { value: "title", name: "Sort of title" },
   { value: "body", name: "Sort of body" },
@@ -26,6 +27,9 @@ const sortedPosts = computed(() => {
       (post1, post2) => post1[selectedSort.value] - post2[selectedSort.value]
     );
   }
+});
+const searchAndSortedPosts = computed(() => {
+  return sortedPosts.value.filter((post) => post.title.includes(search.value));
 });
 
 const createPost = (post) => {
@@ -71,6 +75,7 @@ provide("deletedPost", deletedPost);
         :selectedSort="selectedSort"
         @update:selectedSort="(value) => (selectedSort = value)"
       />
+      <my-input v-focus placeholder="Search..." v-model="search"></my-input>
     </div>
 
     <my-modal
@@ -86,7 +91,7 @@ provide("deletedPost", deletedPost);
 
     <my-loading v-if="isLoading" />
     <div v-else>
-      <posts-list v-bind:posts="sortedPosts" />
+      <posts-list v-bind:posts="searchAndSortedPosts" />
       <div class="pages">
         <div
           class="page"
