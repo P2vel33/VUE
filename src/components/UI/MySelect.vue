@@ -24,6 +24,9 @@ const selectSort = (event) => {
 
 <style scoped>
 select {
+  color: teal;
+  border: 3px solid teal;
+  padding: 9px;
   border-radius: 5px;
 }
 </style>

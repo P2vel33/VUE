@@ -1,5 +1,6 @@
 <script setup>
 import { inject } from "vue";
+import { usePostsStore } from "../store/PostsStore";
 // import MyButton from "./UI/MyButton.vue";
 
 // const getPostId = inject("getPostId");
@@ -10,6 +11,8 @@ const props = defineProps({
   title: String,
   body: String,
 });
+
+const postsStore = usePostsStore();
 </script>
 
 <template>
@@ -23,7 +26,9 @@ const props = defineProps({
     </div>
     <div style="margin-left: auto">
       <my-button @click="$router.push(`/posts/${props.id}`)">Open</my-button>
-      <my-button style="margin-left: 10px" @click="deletedPost(props)"
+      <my-button
+        style="margin-left: 10px"
+        @click="postsStore.deletedPost(props)"
         >Delete</my-button
       >
     </div>

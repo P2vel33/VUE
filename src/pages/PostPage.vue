@@ -169,11 +169,7 @@ provide("deletedPost", deletedPost);
   border: 3px solid blue;
 }
 
-select {
-  color: teal;
-  border: 3px solid teal;
-  padding: 9px;
-}
+
 .head {
   display: flex;
   gap: 10px;

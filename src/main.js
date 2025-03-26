@@ -1,4 +1,5 @@
 import { createApp } from "vue";
+import { createPinia } from "pinia";
 // import './style.css'
 // import App from "./App.vue";
 import App from "./AppCAPI.vue";
@@ -16,6 +17,6 @@ components.forEach((component) => {
   return app.component(component.__name, component);
 });
 
-app.use(router).mount("#app");
+app.use(createPinia()).use(router).mount("#app");
 
 // createApp(App).mount("#app");
